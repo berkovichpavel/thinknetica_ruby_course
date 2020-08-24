@@ -1,8 +1,5 @@
 [![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/simple_ruby_projects/tree/master/gallows)
 
-
-This project is to demonstrate my knowledge of Object Oriented Programming Language in Ruby, building a gallows game on the command line where player can play and the gallows is displayed in between turns.
-
 # Tasks for the first lesson
 
 - **Идеальный вес**. Программа запрашивает у пользователя имя и рост и выводит идеальный вес по формуле (<рост> - 110) * 1.15, после чего выводит результат пользователю на экран с обращением по имени. Если идеальный вес получается отрицательным, то выводится строка "Ваш вес уже оптимальный"
