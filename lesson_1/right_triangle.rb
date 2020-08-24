@@ -3,13 +3,21 @@ first = gets.chomp.to_f
 second = gets.chomp.to_f
 third = gets.chomp.to_f
 
-hypotenuse_equality = if first > second && first > third
-                        Math.sqrt(third**2 + second**2) == first
-                      elsif second > third
-                        Math.sqrt(third**2 + first**2) == second
-                      else
-                        Math.sqrt(second**2 + first**2) == third
-                      end
+if first > second && first > third
+  side1 = second
+  side2 = third
+  hypotenuse = first
+elsif second > third
+  side1 = first
+  side2 = third
+  hypotenuse = second
+else
+  side1 = first
+  side2 = second
+  hypotenuse = third
+end
+
+hypotenuse_equality = Math.sqrt(side1**2 + side2**2) == hypotenuse
 
 if first == second && first == third
   puts 'Треугольник равнобедренный и равносторонний!'
