@@ -16,7 +16,7 @@ loop do
   end
 end
 amount_of_purchases = 0
-purchased_goods.each { |_key, value| amount_of_purchases += value[:price] * value[:amount] }
+purchased_goods.each_value { |value| amount_of_purchases += value[:price] * value[:amount] }
 
 puts purchased_goods.to_s
 puts "Amount of purchases: #{amount_of_purchases}"
