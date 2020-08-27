@@ -1,5 +1,3 @@
-require_relative 'station'
-
 class Route
   attr_accessor :stations
   def initialize(start_station, end_station)

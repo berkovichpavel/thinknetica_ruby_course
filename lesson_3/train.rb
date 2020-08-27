@@ -7,8 +7,6 @@ class Train
     @type = type
     @wagons_amount = wagons_amount
     @speed = 0
-    @route = nil
-    @current_station = nil
     puts "Train ##{self.serial_number} created. Type: #{self.type}. Number of wagons: #{self.wagons_amount}."
   end
 
@@ -44,7 +42,7 @@ class Train
   end
 
   def add_route(route)
-    self.route.stations.first.send_train(self) unless self.route.nil?
+    self.route.stations.first.send_train(self) if self.route
     self.route = route
     route.stations.first.train_reception(self)
     self.current_station = route.stations.first

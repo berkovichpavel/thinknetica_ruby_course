@@ -1,5 +1,3 @@
-require_relative 'train'
-
 class Station
   attr_accessor :train_list
   attr_reader :name
@@ -10,7 +8,7 @@ class Station
   end
 
   def train_reception(train)
-    unless train.route.nil?
+    if train.route
       train.route = nil unless train.route.stations.include?(self)
       train.current_station&.send_train(train)
     end

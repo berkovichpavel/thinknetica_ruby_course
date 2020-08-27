@@ -1,4 +1,6 @@
 require_relative 'train'
+require_relative 'station'
+require_relative 'route'
 
 station_vitebsk = Station.new('Vitebsk')
 station_soligorsk = Station.new('Soligorsk')
