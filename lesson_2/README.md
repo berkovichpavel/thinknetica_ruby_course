@@ -1,4 +1,4 @@
-[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/ruby_course/tree/master/lesson_1)
+[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/ruby_course/tree/master/lesson_2)
 
 # Tasks for the second lesson
 
