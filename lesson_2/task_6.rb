@@ -13,8 +13,8 @@ loop do
     purchased_goods[name] = { price: price, amount: amount }
   else
     puts 'This product was purchased'
-  end
-end
+  end 
+send
 amount_of_purchases = 0
 purchased_goods.each_value { |value| amount_of_purchases += value[:price] * value[:amount] }
 
