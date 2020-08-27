@@ -12,7 +12,7 @@ class Station
   def train_reception(train)
     unless train.route.nil?
       train.route = nil unless train.route.stations.include?(self)
-      train.current_station.send_train(train) unless train.current_station.nil?
+      train.current_station&.send_train(train)
     end
 
     train.current_station = self
