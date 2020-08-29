@@ -4,6 +4,8 @@ require_relative 'cargo_train'
 require_relative 'wagon'
 require_relative 'cargo_wagon'
 require_relative 'passenger_wagon'
+require_relative 'station'
+require_relative 'route'
 
 class Controller
   attr_accessor :stations, :trains, :routes
