@@ -104,20 +104,20 @@ class Controller
       puts 'wrong stations!'
       return
     end
-    add_middle_stations(new_route)
+    add_or_delete_middle_stations(new_route)
     routes << new_route
   end
 
-  def add_middle_stations(route)
+  def add_or_delete_middle_stations(route)
     loop do
-      puts 'Want to add stations to the middle(1/0)?'
+      puts 'Want to add stations to the middle(1/-1)?'
       choice = STDIN.gets.chomp.to_i
-      break if choice.zero?
+      break unless choice == 1 || choice == -1
 
       puts 'Select number of station.'
       show_all_stations
       number = STDIN.gets.chomp.to_i
-      route.add_station(stations[number - 1])
+      choice == 1 ? route.add_station(stations[number - 1]) : route.remove_station(stations[number - 1])
     end
   end
 
