@@ -63,6 +63,33 @@ class Controller
     puts string
   end
 
+  def select_train
+    puts 'Select the train'
+    show_all_trains
+    choice = STDIN.gets.chomp.to_i
+    choice.between?(1, trains.size) ? trains[choice - 1] : nil
+  end
+
+  def select_route
+    puts 'Select the route'
+    show_all_routes
+    route_choice = STDIN.gets.chomp.to_i
+    route_choice.between?(1, routes.size)? routes[route_choice - 1] : nil
+  end
+
+  def select_station
+    puts 'Choose a station number'
+    choice = STDIN.gets.chomp.to_i
+    choice.between?(1, stations.size) ? stations[choice - 1] : nil
+  end
+
+  def select_wagon(train)
+    puts 'Select the wagon'
+    train.show_wagons
+    choice = STDIN.gets.chomp.to_i
+    choice.between?(1, train.wagons.size) ? train.wagons[choice - 1] : nil
+  end
+
   def create_stations
     loop do
       print 'Enter a station name: '
@@ -110,7 +137,7 @@ class Controller
 
   def add_or_delete_middle_stations(route)
     loop do
-      puts 'Want to add stations to the middle(1/-1)?'
+      puts 'Want to add or delete stations to the middle(1/-1)?'
       choice = STDIN.gets.chomp.to_i
       break unless choice == 1 || choice == -1
 
@@ -122,34 +149,29 @@ class Controller
   end
 
   def assign_route
-    puts 'Select the train to which you want to add the route'
-    show_all_trains
-    choice = STDIN.gets.chomp.to_i
-    if choice.between?(1, trains.size)
-      train = trains[choice - 1]
-      puts 'Select the route'
-      show_all_routes
-      route_choice = STDIN.gets.chomp.to_i
-      if route_choice.between?(1, routes.size)
-        train.add_route(routes[route_choice - 1])
-      else
-        puts 'You entered incorrect data!'
-        nil
-      end
-    else
+    train = select_train
+    if train.nil?
       puts 'You entered incorrect data!'
       nil
+    else
+      route = select_route
+      if route.nil?
+        puts 'You entered incorrect data!'
+        nil
+      else
+        train.add_route(route)
+      end
     end
   end
 
   WAGONS_TYPES = { cargo: CargoWagon, passenger: PassengerWagon }.freeze
 
   def add_wagons
-    puts 'Select the train to which you want to add the car'
-    show_all_trains
-    choice = STDIN.gets.chomp.to_i
-    if choice.between?(1, trains.size)
-      train = trains[choice - 1]
+    train = select_train
+    if train.nil?
+      puts 'You entered incorrect data!'
+      nil
+    else
       loop do
         wagon = WAGONS_TYPES[train.type.to_sym].new
         train.hitch_wagons(wagon)
@@ -157,51 +179,39 @@ class Controller
         yes_no = STDIN.gets.chomp.to_i
         break if yes_no.zero?
       end
-    else
-      puts 'You entered incorrect data!'
-      nil
     end
   end
 
   def remove_wagons
-    puts 'Select the train to which you want to remove the wagon'
-    show_all_trains
-    choice = STDIN.gets.chomp.to_i
-    if choice.between?(1, trains.size)
-      train = trains[choice - 1]
+    train = select_train
+    if train.nil?
+      puts 'You entered incorrect data!'
+      nil
+    else
       loop do
-        puts 'Select the wagon you want to remove'
-        train.show_wagons
-        choice = STDIN.gets.chomp.to_i
-        if choice.between?(1, train.wagons.size)
-          train.unhitch_wagons(train.wagons[choice - 1])
-        else
+        wagon = select_wagon(train)
+        if wagon.nil?
           puts 'You entered incorrect data!'
           return
+        else
+          train.unhitch_wagons(wagon)
         end
         puts 'Would you like to remove wagon(1/0)?'
         yes_no = STDIN.gets.chomp.to_i
         break if yes_no.zero?
       end
-
-    else
-      puts 'You entered incorrect data!'
-      nil
     end
   end
 
   def move_the_train
-    puts 'Select the train to which you want to move'
-    show_all_trains
-    choice = STDIN.gets.chomp.to_i
-    if choice.between?(1, trains.size)
-      train = trains[choice - 1]
+    train = select_train
+    if train.nil?
+      puts 'You entered incorrect data!'
+      nil
+    else
       puts 'Where do you want to go forward or backward?(1/-1)'
       choice = STDIN.gets.chomp.to_i
       choice.positive? ? train.move_to_the_next_station : train.move_to_the_previous_station
-    else
-      puts 'You entered incorrect data!'
-      nil
     end
   end
 
@@ -211,14 +221,13 @@ class Controller
     choice = STDIN.gets.chomp.to_i
     return if choice.zero?
 
-    puts 'Choose a station number'
-    choice = STDIN.gets.chomp.to_i
-    if choice.between?(1, stations.size)
-      station = stations[choice - 1]
-      station.show_train_list
-    else
+    station = select_station
+    if station.nil?
       puts 'You entered incorrect data!'
       nil
+    else
+      station = stations[choice - 1]
+      station.show_train_list
     end
   end
 end
