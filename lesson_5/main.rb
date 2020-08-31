@@ -18,6 +18,6 @@ w1.print_company_name
 w2.print_company_name
 w3.print_company_name
 
-puts Train.instances
-puts Station.instances
-puts Wagon.instances
+puts "Number of trains: #{Train.instances}"
+puts "Number of stations: #{Station.instances}"
+puts "Number of wagons: #{Wagon.instances}" 

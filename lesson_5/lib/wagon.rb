@@ -11,7 +11,6 @@ class Wagon
     @number = @@serial_number
     @@serial_number += 1
     add_company_name
-    print_company_name
     register_instance
   end
 end

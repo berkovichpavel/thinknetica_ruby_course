@@ -17,7 +17,6 @@ class Train
     add_company_name
     @@trains[self.serial_number] = self
     puts "Train ##{self.serial_number} created. Type: #{self.type}. Number of wagons: #{wagons.size}."
-    print_company_name
     register_instance
   end
 
