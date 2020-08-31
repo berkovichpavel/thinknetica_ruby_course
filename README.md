@@ -9,6 +9,7 @@
 - **lesson 3** OOP Basics in Ruby
 - **lesson 4** Interfaces, inheritance and polymorphism
 - **lesson 5** Class Methods, Modules, and the Ruby Object Model
+- **lesson 6** Exceptions
 
 
 # Course summary
