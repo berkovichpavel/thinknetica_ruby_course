@@ -14,9 +14,9 @@ w1 = Wagon.new
 w2 = Wagon.new
 w3 = Wagon.new
 
-w1.print_company_name
-w2.print_company_name
-w3.print_company_name
+puts w1.company_name
+puts w2.company_name
+puts w3.company_name
 
 puts "Number of trains: #{Train.instances}"
 puts "Number of stations: #{Station.instances}"

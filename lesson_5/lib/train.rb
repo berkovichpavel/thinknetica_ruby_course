@@ -20,6 +20,11 @@ class Train
     register_instance
   end
 
+  def add_company_name
+    print 'Add company name for Train: '
+    self.company_name = STDIN.gets.chomp
+  end
+
   def self.find(serial_number)
     @@trains[serial_number]
   end

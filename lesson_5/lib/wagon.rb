@@ -10,7 +10,12 @@ class Wagon
   def initialize
     @number = @@serial_number
     @@serial_number += 1
-    add_company_name
     register_instance
+    add_company_name
+  end
+
+  def add_company_name
+    print 'Add company name to Wagon: '
+    self.company_name = STDIN.gets.chomp
   end
 end
