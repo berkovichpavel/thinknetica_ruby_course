@@ -2,7 +2,7 @@ module CompanyName
   attr_reader :company_name
 
   def add_company_name
-    print 'Enter a company name:'
+    print "Enter a company name #{self.class}: "
     @company_name = gets.chomp
   end
 

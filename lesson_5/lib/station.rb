@@ -14,7 +14,13 @@ class Station
   end
 
   def self.all
-    @@stations.to_s
+    puts '------------------'
+    puts '   All stations   '
+    puts '------------------'
+    @@stations.each_with_index do |station, index|
+      puts "#{index + 1}. #{station.name}"
+    end
+    puts '------------------'
   end
 
   def train_reception(train)
