@@ -1,6 +1,6 @@
-[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/ruby_course/tree/master/lesson_5)
+[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/ruby_course/tree/master/lesson_6)
 
-# Tasks for the fourth lesson (Interfaces, inheritance and polymorphism)
+# Tasks for the sixth lesson (Exceptions)
 
 Продолжить задание с 5 урока.
 

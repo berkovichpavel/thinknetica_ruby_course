@@ -1,6 +1,6 @@
-[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/ruby_course/tree/master/lesson_4)
+[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/ruby_course/tree/master/lesson_5)
 
-# Tasks for the fourth lesson (Interfaces, inheritance and polymorphism)
+# Tasks for the fifth lesson (Class Methods, Modules, and the Ruby Object Model)
 
 Продолжить задание с 4 урока.
 
