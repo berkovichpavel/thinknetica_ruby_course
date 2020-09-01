@@ -107,41 +107,48 @@ class Controller
 
   def create_trains
     loop do
-      puts "Indicate the type of train. Available trains: #{TRAINS_TYPES.keys}"
-      type = gets.chomp.to_sym
-      puts 'Enter the train serial number'
-      serial_number = gets.chomp
-      if TRAINS_TYPES.keys.include?(type)
-        trains << TRAINS_TYPES[type].new(serial_number, type)
-      else
-        puts "Couldn't create a wagon! Unknown type #{type}"
+      begin
+        puts "Indicate the type of train. Available trains: #{TRAINS_TYPES.keys}"
+        type = gets.chomp.to_sym
+        raise 'Incorrect type!' unless TRAINS_TYPES.keys.include?(type)
+
+        puts 'Enter the train serial number'
+        serial_number = gets.chomp
+        train = TRAINS_TYPES[type].new(serial_number, type)
+
+        trains << train
       end
       puts 'Want create train(1/0)?'
       choice = STDIN.gets.chomp.to_i
       break if choice.zero?
     end
-  end
+  rescue RuntimeError => e
+    mistakes ||= 0
+    puts "ERROR: #{e.message}. Try again"
+    mistakes += 1
+    retry if mistakes <= 3
+    puts 'You are hopeless :('
+end
 
   def create_route
     puts 'When creating a route, select the start and end station and enter their number via the enter.'
     show_all_stations
     first_station = STDIN.gets.chomp.to_i
     second_station = STDIN.gets.chomp.to_i
-    if first_station.between?(1, stations.size) && second_station.between?(1, stations.size)
-      new_route = Route.new(stations[first_station - 1], stations[second_station - 1])
-    else
-      puts 'wrong stations!'
-      return
-    end
+    raise 'wrong stations!' unless first_station.between?(1, stations.size) && second_station.between?(1, stations.size)
+
+    new_route = Route.new(stations[first_station - 1], stations[second_station - 1])
     add_or_delete_middle_stations(new_route)
     routes << new_route
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
   end
 
   def add_or_delete_middle_stations(route)
     loop do
       puts 'Want to add or delete stations to the middle(1/-1)?'
       choice = STDIN.gets.chomp.to_i
-      break unless choice == 1 || choice == -1
+      break unless [1, -1].include?(choice)
 
       puts 'Select number of station.'
       show_all_stations
@@ -152,69 +159,66 @@ class Controller
 
   def assign_route
     train = select_train
-    if train.nil?
-      puts 'You entered incorrect data!'
-      nil
-    else
-      route = select_route
-      if route.nil?
-        puts 'You entered incorrect data!'
-        nil
-      else
-        train.add_route(route)
-      end
-    end
+    raise 'You entered incorrect data!' if train.nil?
+
+    route = select_route
+    raise 'You entered incorrect data!' if route.nil?
+
+    train.add_route(route)
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
+    nil
   end
 
   WAGONS_TYPES = { cargo: CargoWagon, passenger: PassengerWagon }.freeze
 
   def add_wagons
     train = select_train
-    if train.nil?
-      puts 'You entered incorrect data!'
-      nil
-    else
-      loop do
-        wagon = WAGONS_TYPES[train.type.to_sym].new
-        train.hitch_wagons(wagon)
-        puts 'Would you like to add new wagon(1/0)?'
-        yes_no = STDIN.gets.chomp.to_i
-        break if yes_no.zero?
-      end
+    raise 'You entered incorrect data!' if train.nil?
+
+    loop do
+      wagon = WAGONS_TYPES[train.type.to_sym].new
+      train.hitch_wagons(wagon)
+      puts 'Would you like to add new wagon(1/0)?'
+      yes_no = STDIN.gets.chomp.to_i
+      break if yes_no.zero?
     end
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
+    nil
   end
 
   def remove_wagons
     train = select_train
-    if train.nil?
-      puts 'You entered incorrect data!'
-      nil
-    else
-      loop do
-        wagon = select_wagon(train)
-        if wagon.nil?
-          puts 'You entered incorrect data!'
-          return
-        else
-          train.unhitch_wagons(wagon)
-        end
-        puts 'Would you like to remove wagon(1/0)?'
-        yes_no = STDIN.gets.chomp.to_i
-        break if yes_no.zero?
+    raise 'You entered incorrect data!' if train.nil?
+
+    loop do
+      wagon = select_wagon(train)
+      if wagon.nil?
+        puts 'You entered incorrect data!'
+        return
+      else
+        train.unhitch_wagons(wagon)
       end
+      puts 'Would you like to remove wagon(1/0)?'
+      yes_no = STDIN.gets.chomp.to_i
+      break if yes_no.zero?
     end
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
+    nil
   end
 
   def move_the_train
     train = select_train
-    if train.nil?
-      puts 'You entered incorrect data!'
-      nil
-    else
-      puts 'Where do you want to go forward or backward?(1/-1)'
-      choice = STDIN.gets.chomp.to_i
-      choice.positive? ? train.move_to_the_next_station : train.move_to_the_previous_station
-    end
+    raise 'You entered incorrect data!' if train.nil?
+
+    puts 'Where do you want to go forward or backward?(1/-1)'
+    choice = STDIN.gets.chomp.to_i
+    choice.positive? ? train.move_to_the_next_station : train.move_to_the_previous_station
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
+    nil
   end
 
   def view_station_and_train_list
@@ -224,12 +228,12 @@ class Controller
     return if choice.zero?
 
     station = select_station
-    if station.nil?
-      puts 'You entered incorrect data!'
-      nil
-    else
-      station = stations[choice - 1]
-      station.show_train_list
-    end
+    raise 'You entered incorrect data!' if station.nil?
+
+    station = stations[choice - 1]
+    station.show_train_list
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
+    nil
   end
 end

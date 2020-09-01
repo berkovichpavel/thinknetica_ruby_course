@@ -1,9 +1,9 @@
 class CargoTrain < Train
   def hitch_wagons(wagon)
-    if wagon.type == :cargo
-      super
-    else
-      puts 'The type of carriage and train does not match!'
-    end
+    raise 'The type of carriage and train does not match!' unless wagon.type == :cargo
+
+    super
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
   end
 end

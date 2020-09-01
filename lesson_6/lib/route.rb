@@ -11,12 +11,12 @@ class Route
   end
 
   def remove_station(station)
-    if [stations.first, stations.last].include?(station)
-      puts 'destinations must not be changed!'
-    else
-      stations.delete(station)
-      puts "Station #{station.name} was removed from route #{stations.first.name} - #{stations.last.name}"
-    end
+    raise 'destinations must not be changed!' if [stations.first, stations.last].include?(station)
+
+    stations.delete(station)
+    puts "Station #{station.name} was removed from route #{stations.first.name} - #{stations.last.name}"
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
   end
 
   def show_stations
