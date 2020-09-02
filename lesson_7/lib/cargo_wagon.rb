@@ -20,8 +20,4 @@ class CargoWagon < Wagon
   def free
     total - filled
   end
-
-
-
-
 end

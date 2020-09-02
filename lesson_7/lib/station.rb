@@ -41,7 +41,9 @@ class Station
 
     if type
       puts "Trains at station #{name} of type #{type}:"
-      block_iterate_trains { |train| puts "##{train.serial_number} #{train.class}. Wagons amount: #{train.wagons.size}" if train.type == type }
+      block_iterate_trains do |train|
+        puts "##{train.serial_number} #{train.class}. Wagons amount: #{train.wagons.size}" if train.type == type
+      end
     else
       puts "All trains at station #{name}:"
       block_iterate_trains { |train| puts "##{train.serial_number} #{train.class}. Wagons amount: #{train.wagons.size}" }

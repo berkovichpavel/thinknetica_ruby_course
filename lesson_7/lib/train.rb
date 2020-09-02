@@ -11,7 +11,7 @@ class Train
   attr_accessor :speed, :wagons, :serial_number, :type, :route, :current_station
   @@trains = {}
   VALID_TRAIN_NUMBER = /^[\d\w]{3}-?[\d\w]{2}$/i.freeze
-  TRAINS_TYPES = ['cargo', 'passenger'].freeze
+  TRAINS_TYPES = %w[cargo passenger].freeze
 
   def initialize(serial_number, type)
     @serial_number = serial_number

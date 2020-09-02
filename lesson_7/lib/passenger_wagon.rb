@@ -24,6 +24,4 @@ class PassengerWagon < Wagon
   def free
     total - filled
   end
-
-
 end
