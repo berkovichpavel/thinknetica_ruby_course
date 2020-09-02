@@ -44,8 +44,7 @@ class Station
       block_iterate_trains { |train| puts "##{train.serial_number} #{train.class}. Wagons amount: #{train.wagons.size}" if train.type == type }
     else
       puts "All trains at station #{name}:"
-      # не работает и не понимаю почему???
-      block_iterate_trains { |train| "##{train.serial_number} #{train.class}. Wagons amount: #{train.wagons.size}" }
+      block_iterate_trains { |train| puts "##{train.serial_number} #{train.class}. Wagons amount: #{train.wagons.size}" }
     end
   rescue RuntimeError => e
     puts "ERROR: #{e.message}"
