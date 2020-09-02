@@ -4,9 +4,7 @@ class PassengerWagon < Wagon
 
   def initialize(total_seat_number = 30)
     @type = :passenger
-    @total = total_seat_number
-    @filled = 0
-    super()
+    super(total_seat_number)
   end
 
   def take_a_seat
@@ -15,13 +13,5 @@ class PassengerWagon < Wagon
     self.filled += 1
   rescue RuntimeError => e
     puts "ERROR: #{e.message}"
-  end
-
-  def filled?
-    filled == total
-  end
-
-  def free
-    total - filled
   end
 end
