@@ -28,7 +28,17 @@ class Wagon
     total - filled
   end
 
-  def filled?
-    total == filled
+  def filled?(value)
+    total - filled < value
+  end
+
+  protected
+
+  def take_a_place(value, error_message)
+    raise error_message if filled?(value)
+
+    self.filled += value
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
   end
 end

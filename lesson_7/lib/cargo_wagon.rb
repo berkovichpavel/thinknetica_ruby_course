@@ -8,10 +8,6 @@ class CargoWagon < Wagon
   end
 
   def take_a_volume(volume = 20)
-    raise 'No free volume' if total - filled < volume
-
-    self.filled += volume
-  rescue RuntimeError => e
-    puts "ERROR: #{e.message}"
+    take_a_place(volume, 'No free volume')
   end
 end

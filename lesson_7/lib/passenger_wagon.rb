@@ -8,10 +8,6 @@ class PassengerWagon < Wagon
   end
 
   def take_a_seat
-    raise 'No free places' if filled?
-
-    self.filled += 1
-  rescue RuntimeError => e
-    puts "ERROR: #{e.message}"
+    take_a_place(1, 'No free places')
   end
 end
