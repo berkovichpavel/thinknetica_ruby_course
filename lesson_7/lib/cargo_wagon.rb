@@ -7,7 +7,7 @@ class CargoWagon < Wagon
     super(total_volume)
   end
 
-  def take_a_volume(volume = 20)
-    take_a_place(volume, 'No free volume')
+  def take_a_volume(volume = 20, message = 'No free volume')
+    take_a_place(volume, message)
   end
 end

@@ -7,7 +7,7 @@ class PassengerWagon < Wagon
     super(total_seat_number)
   end
 
-  def take_a_seat
-    take_a_place(1, 'No free places')
+  def take_a_place(message = 'No free places')
+    super(1, message)
   end
 end
