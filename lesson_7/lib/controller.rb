@@ -265,7 +265,7 @@ end
       choice = STDIN.gets.chomp.to_i
       wagon.take_a_volume(choice)
     else
-      wagon.take_a_seat
+      wagon.take_a_place
     end
   rescue RuntimeError => e
     puts "ERROR: #{e.message}"
