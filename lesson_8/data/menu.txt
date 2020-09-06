@@ -1,0 +1,13 @@
+You can:
+      1.  Create stations
+      2.  Create trains
+      3.  Create route and manage stations in it (add, delete)
+      4.  Assign a route to a train
+      5.  Add wagons to the train
+      6.  Disconnect wagons from the train
+      7.  Move the train along the route forward and backward
+      8.  View station list and train list at station
+      9.  Display a list of wagons by the train
+      10. Take up space or volume in the carriage
+      0.  Exit
+What do you want to do(enter a number)?
