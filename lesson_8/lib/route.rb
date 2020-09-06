@@ -2,12 +2,10 @@ class Route
   attr_accessor :stations
   def initialize(start_station, end_station)
     @stations = [start_station, end_station]
-    puts "Created route #{stations.first.name} - #{stations.last.name}"
   end
 
   def add_station(station)
     stations.insert(-2, station)
-    puts "Added station #{station.name} to route #{stations.first.name} - #{stations.last.name}"
   end
 
   def remove_station(station)
@@ -20,7 +18,6 @@ class Route
 
   def delete_station_from_route(station)
     stations.delete(station)
-    puts "Station #{station.name} was removed from route #{stations.first.name} - #{stations.last.name}"
   end
 
   def show_stations

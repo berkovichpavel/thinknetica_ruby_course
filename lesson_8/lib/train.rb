@@ -46,9 +46,6 @@ class Train
     raise 'To hitch the carriage, you must stop!' unless speed.zero?
 
     wagons << wagon
-    puts "A wagon has been added to train #{serial_number}. Now number of wagons =  #{wagons.size}."
-  rescue RuntimeError => e
-    puts "ERROR: #{e.message}"
   end
 
   def unhitch_wagons(wagon)
@@ -56,9 +53,6 @@ class Train
     raise 'You cannot unhook the wagon if it is not there' unless wagons.size.positive?
 
     wagons.delete(wagon)
-    puts "The wagon is uncoupled from train #{serial_number}. Now number of wagons = #{wagons.size}."
-  rescue RuntimeError => e
-    puts "ERROR: #{e.message}"
   end
 
   def show_wagons
@@ -70,10 +64,9 @@ class Train
     self.route = route
     route.stations.first.train_reception(self)
     self.current_station = route.stations.first
-    puts "Train ##{serial_number} is assigned route #{route.stations.first.name} - #{route.stations.last.name}"
   end
 
-  def move_to_the_next_station
+  def move_to_the_next_station # rubocop:disable Metrics/AbcSize
     raise 'can\'t move without a route' if route.nil?
     if current_station == route.stations.last
       raise 'You have already arrived at the terminal station and you have nowhere to go!'
@@ -82,11 +75,9 @@ class Train
     current_station.send_train(self)
     self.current_station = route.stations[route.stations.index(current_station) + 1]
     current_station.train_reception(self)
-  rescue RuntimeError => e
-    puts "ERROR: #{e.message}"
   end
 
-  def move_to_the_previous_station
+  def move_to_the_previous_station # rubocop:disable Metrics/AbcSize
     raise 'can\'t move without a route' if route.nil?
     if current_station == route.stations.first
       raise 'You have already arrived at the initial station and you have nowhere to go!'
@@ -97,7 +88,7 @@ class Train
     current_station.train_reception(self)
   end
 
-  def stations_around
+  def stations_around # rubocop:disable Metrics/AbcSize
     raise 'can\'t move without a route' if route.nil?
 
     station_index = route.stations.index(current_station)
@@ -110,8 +101,6 @@ class Train
     raise 'There are no vagons at the train' if wagons.empty?
 
     wagons.each { |wagon| block.call(wagon) }
-  rescue RuntimeError => e
-    puts "ERROR: #{e.message}"
   end
 
   private

@@ -16,7 +16,6 @@ class Station
     validate!
     register_instance
     @@stations << self
-    puts "Station with name #{name} built"
   end
 
   def self.all
@@ -29,12 +28,10 @@ class Station
     end
     train.current_station = self
     train_list << train
-    puts "Train #{train.serial_number} arrived at station #{name}"
   end
 
   def send_train(train)
     train_list.delete(train)
-    puts "Train #{train.serial_number} departed from station #{name}"
   end
 
   def show_train_list(type = false)

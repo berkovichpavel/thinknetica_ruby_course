@@ -208,6 +208,8 @@ class Controller
     capacity = STDIN.gets.chomp.to_i
     wagon = WAGONS_TYPES[train.type.to_sym].new(capacity)
     train.hitch_wagons(wagon)
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
   end
 
   def remove_wagons
@@ -229,6 +231,8 @@ class Controller
     raise 'You entered incorrect data!' if wagon.nil?
 
     train.unhitch_wagons(wagon)
+  rescue RuntimeError => e
+    puts "ERROR: #{e.message}"
   end
 
   def move_the_train

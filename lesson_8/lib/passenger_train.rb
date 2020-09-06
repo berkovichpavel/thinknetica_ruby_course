@@ -3,7 +3,5 @@ class PassengerTrain < Train
     raise 'The type of carriage and train does not match!' unless wagon.type == :passenger
 
     super
-  rescue RuntimeError => e
-    puts "ERROR: #{e.message}"
   end
 end
