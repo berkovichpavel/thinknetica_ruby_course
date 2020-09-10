@@ -11,4 +11,3 @@ class Car
   validate :serial_number, :format, /^[\d\w]{3}-[\d]{2}-[\w]$/i
   validate :issue_year, :type, Integer
 end
-

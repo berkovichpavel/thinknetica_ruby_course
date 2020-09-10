@@ -7,30 +7,29 @@ module Validation
   module InstanceMethods
     def validate!
       self.class.validations.each do |validation|
-        validation.each do |validation_name, args|
-          send(validation_name.to_s, instance_variable_get("@#{args[:name]}".to_sym), args[:condition])
-        end
+        value = instance_variable_get("@#{validation[:name]}".to_sym)
+        send("validate_#{validation[:type]}", value, validation[:condition])
       end
     end
 
     def valid?
-      !!validate!
+      validate!
+      true
     rescue ArgumentError, TypeError
       false
     end
 
     private
 
-    def presence(var, _arg)
-      raise ArgumentError, "Can't be blank" if var.is_a?(String) && var.empty?
-      raise ArgumentError, "Can't be blank" if var.nil?
+    def validate_presence(var, _arg)
+      raise ArgumentError, "Can't be blank" if var.nil? || var.empty?
     end
 
-    def format(var, format)
+    def validate_format(var, format)
       raise ArgumentError, 'Format error' if var !~ format
     end
 
-    def type(var, type)
+    def validate_type(var, type)
       raise TypeError, "Type error. Should be #{type}" unless var.is_a?(type)
     end
   end
@@ -40,9 +39,7 @@ module Validation
 
     def validate(name, type_of_validation, condition = '')
       self.validations ||= []
-      validations << { type_of_validation => { name: name, condition: condition } }
+      validations << { name: name, condition: condition, type: type_of_validation }
     end
   end
-
-
 end

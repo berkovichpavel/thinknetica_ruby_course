@@ -17,4 +17,3 @@ car.serial_number = 'ghg-t5-u'
 
 puts car.valid? ? 'All checks passed successfully' : 'There is a mistake somewhere'
 car.validate!
-
