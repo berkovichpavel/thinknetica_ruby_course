@@ -1,0 +1,23 @@
+{
+  "errors": {
+    "NO_MONEY" : "You don't have enough money! See you soon."
+  },
+  "interplay": {
+    "START_MESSAGE" : "Let's play BlackJack!",
+    "ENTER_NAME": "Enter your name: ",
+    "PLAYER_NAME" : "Player name:",
+    "BALANCE" : "Your balance: ",
+    "CARDS" : "Cards",
+    "CARD_ADDED" : "Card added",
+    "CHOOSE_ACTION": "Choose an action: ",
+    "YOUR_CHOICE": "Your choice is ",
+    "POINTS_QUANTITY" : "Points quantity",
+    "PLAY_AGAIN" : "Let's play again? Press 1 to continue. ",
+    "RESTART" : "Restart? Press 1 to reboot(any other character to exit). ",
+    "ANY_CHARACTER" : "Press any other character to exit",
+    "LOSE" : "********* You loose! *********",
+    "TIE" : "********* Tie *********",
+    "WIN" : "********* You win! *********",
+    "PLAYER_BANKRUPT" : "bankrupt!"
+  }
+}
