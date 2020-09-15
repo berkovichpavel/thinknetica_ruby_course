@@ -2,6 +2,7 @@
 
 <a text-align="center" href="#about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#bw">Built With</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+<a href="#ldl">Live Demo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#mr">Mechanics and game rules</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#cd">Class Definitions</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#gs">Getting Started</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -25,6 +26,9 @@ Blackjack is one of the most popular card games in casinos around the world.
 
 - Ruby
 
+## 🔴 Live Demo <a name = "ldl"></a>
+
+[![Run on Repl.it](https://repl.it/badge/github/berkovichpavel/ruby_course)](https://rubycourse-1.berkovichpavel.repl.run)
 
 ## Mechanics and game rules <a name = "mr"></a>
 - There is a player (user) and a dealer (controlled by the program).
