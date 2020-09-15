@@ -1,8 +1,4 @@
 {
-  "errors": {
-    "NO_MONEY" : "You don't have enough money! See you soon."
-  },
-  "interplay": {
     "START_MESSAGE" : "Let's play BlackJack!",
     "ENTER_NAME": "Enter your name: ",
     "PLAYER_NAME" : "Player name:",
@@ -19,5 +15,4 @@
     "TIE" : "********* Tie *********",
     "WIN" : "********* You win! *********",
     "PLAYER_BANKRUPT" : "bankrupt!"
-  }
 }

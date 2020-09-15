@@ -7,26 +7,28 @@ class BlackJack
   DEALER_STOP_VALUE = 17
   INITIAL_MONEY = 20
 
-  attr_reader :player, :dealer, :deck, :actions
+  attr_reader :player, :dealer, :deck, :actions, :interface
 
-  def initialize
-    UserInteraction.clear_screen
+  def initialize(interface)
+    @interface = interface
+    interface.clear_screen
     @dealer = User.new(name: 'Dealer', money: INITIAL_MONEY)
-    name = UserInteraction.start_game
+    interface.start_game
+    name = STDIN.gets.chomp
     @player = User.new(name: name, money: INITIAL_MONEY)
   end
 
   def restart
-    UserInteraction.clear_screen
+    interface.clear_screen
     self .dealer = User.new(name: 'Dealer', money: INITIAL_MONEY)
     self.player = User.new(name: player.name, money: INITIAL_MONEY)
     start_game
   end
 
   def start_game
-    UserInteraction.clear_screen
+    interface.clear_screen
     init
-    UserInteraction.show_statistics(player)
+    interface.show_statistics(player)
     decision_making
     next_batch
   end
@@ -59,7 +61,7 @@ class BlackJack
   end
 
   def decision_making
-    player_choice = UserInteraction.choose_action(actions)
+    player_choice = interface.choose_action(actions)
     actions.delete(player_choice)
     add_card(dealer) if dealer.score < DEALER_STOP_VALUE
     method(player_choice).call unless player_choice == :open_cards
@@ -73,39 +75,39 @@ class BlackJack
 
   def take_card
     add_card(player)
-    UserInteraction.show_statistics(player)
+    interface.show_statistics(player)
   end
 
   def skip; end
 
   def open_cards
-    UserInteraction.show_statistics(dealer)
+    interface.show_statistics(dealer)
     method(winner_identifying).call
   end
 
   def next_batch
     if money?
-      UserInteraction.play_again? ? start_game : exit
+      interface.play_again? ? start_game : exit
     else
       loser = loser(player, dealer)
-      UserInteraction.bankrupt(loser)
-      UserInteraction.restart? ? restart : exit
+      interface.bankrupt(loser)
+      interface.restart? ? restart : exit
     end
   end
 
   def user_tie
-    puts UserInteraction.tie
+    puts interface.tie
     player.add_money(RATE)
     dealer.add_money(RATE)
   end
 
   def user_win
-    puts UserInteraction.win
+    puts interface.win
     player.add_money(2 * RATE)
   end
 
   def user_lose
-    puts UserInteraction.lose
+    puts interface.lose
     dealer.add_money(RATE)
   end
 

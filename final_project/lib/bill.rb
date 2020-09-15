@@ -1,5 +1,3 @@
-require_relative 'user_interaction'
-
 class Bill
   attr_reader :money
 
@@ -12,7 +10,7 @@ class Bill
   end
 
   def take_money(value)
-    raise ArgumentError, UserInteraction.errors['NO_MONEY'] if money < value
+    raise ArgumentError, "You don't have enough money! See you soon." if money < value
 
     self.money -= value
   end
