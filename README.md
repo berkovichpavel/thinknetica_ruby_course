@@ -13,6 +13,7 @@
 - **lesson 7** Blocks, Proc and lambda
 - **lesson 8** Ruby idioms and good style
 - **lesson 9** Metaprogramming
+- **Final Ruby project** Black Jack game
 
 
 # Course summary
