@@ -27,8 +27,8 @@ class BlackJack
   end
 
   def start_game
-    interface.clear_screen
     while money?
+      interface.clear_screen
       init
       interface.show_statistics(player)
       decision_making until round_finished
