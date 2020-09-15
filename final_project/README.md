@@ -1,4 +1,4 @@
-[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/black_jack)
+[![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/ruby_course/tree/master/final_project)
 
 <a text-align="center" href="#about">About</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 <a href="#bw">Built With</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
