@@ -65,6 +65,6 @@ class UserInteraction
   end
 
   def exit(player)
-    puts "Bye, #{player.name}. 1" + interplay['LEAVE'] + player.balance.to_s
+    puts "Bye, #{player.name}. " + interplay['LEAVE'] + player.balance.to_s
   end
 end
