@@ -63,4 +63,8 @@ class UserInteraction
   def bankrupt(player)
     puts player.name + ' ' + interplay['PLAYER_BANKRUPT']
   end
+
+  def exit(player)
+    puts "Bye, #{player.name}. 1" + interplay['LEAVE'] + player.balance.to_s
+  end
 end

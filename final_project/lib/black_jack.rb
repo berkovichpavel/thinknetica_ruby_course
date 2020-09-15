@@ -7,7 +7,7 @@ class BlackJack
   DEALER_STOP_VALUE = 17
   INITIAL_MONEY = 20
 
-  attr_reader :player, :dealer, :deck, :actions, :interface
+  attr_reader :player, :dealer, :deck, :actions, :interface, :round_finished
 
   def initialize(interface)
     @interface = interface
@@ -16,29 +16,34 @@ class BlackJack
     interface.start_game
     name = STDIN.gets.chomp
     @player = User.new(name: name, money: INITIAL_MONEY)
+    @round_finished = false
   end
 
   def restart
     interface.clear_screen
-    self .dealer = User.new(name: 'Dealer', money: INITIAL_MONEY)
+    self.dealer = User.new(name: 'Dealer', money: INITIAL_MONEY)
     self.player = User.new(name: player.name, money: INITIAL_MONEY)
     start_game
   end
 
   def start_game
     interface.clear_screen
-    init
-    interface.show_statistics(player)
-    decision_making
-    next_batch
+    while money?
+      init
+      interface.show_statistics(player)
+      decision_making until round_finished
+      break unless play_again?
+    end
+    new_game
   end
 
   private
 
-  attr_writer :player, :dealer, :deck, :actions
+  attr_writer :player, :dealer, :deck, :actions, :round_finished
 
   def init
     deal_new_cards
+    self.round_finished = false
     player.take_money(RATE)
     dealer.take_money(RATE)
   rescue ArgumentError => e
@@ -65,12 +70,7 @@ class BlackJack
     actions.delete(player_choice)
     add_card(dealer) if dealer.score < DEALER_STOP_VALUE
     method(player_choice).call unless player_choice == :open_cards
-    if %i[take_card open_cards].include?(player_choice)
-      open_cards
-      nil
-    else
-      decision_making
-    end
+    open_cards if %i[take_card open_cards].include?(player_choice)
   end
 
   def take_card
@@ -85,14 +85,15 @@ class BlackJack
     method(winner_identifying).call
   end
 
-  def next_batch
-    if money?
-      interface.play_again? ? start_game : exit
-    else
-      loser = loser(player, dealer)
-      interface.bankrupt(loser)
-      interface.restart? ? restart : exit
-    end
+  def play_again?
+    interface.play_again?
+  end
+
+  def new_game
+    loser = loser(player, dealer)
+    interface.bankrupt(loser) if loser.balance.zero?
+    interface.exit(player)
+    interface.restart? ? restart : exit
   end
 
   def user_tie
@@ -112,6 +113,7 @@ class BlackJack
   end
 
   def winner_identifying
+    self.round_finished = true
     return :user_tie if player.score == dealer.score || tie?
     return :user_lose if player.score > 21
     return :user_win if dealer.score > 21

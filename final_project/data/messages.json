@@ -14,5 +14,6 @@
     "LOSE" : "********* You loose! *********",
     "TIE" : "********* Tie *********",
     "WIN" : "********* You win! *********",
-    "PLAYER_BANKRUPT" : "bankrupt!"
+    "PLAYER_BANKRUPT" : "bankrupt!",
+    "LEAVE" : "You leave with $ "
 }
