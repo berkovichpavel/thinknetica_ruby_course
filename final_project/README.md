@@ -83,7 +83,7 @@ To get a local copy of the repository please run the following commands on your 
 ```
 $ cd <folder>
 
-$ git clone https://github.com/berkovichpavel/<>.git
+$ git clone https://github.com/berkovichpavel/ruby_course/tree/master/final_project.git
 ```
 
 **To run the code:** 
