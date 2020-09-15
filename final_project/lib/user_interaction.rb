@@ -35,15 +35,15 @@ class UserInteraction
   end
 
   def win
-    interplay['WIN']
+    puts interplay['WIN']
   end
 
   def tie
-    interplay['TIE']
+    puts interplay['TIE']
   end
 
   def lose
-    interplay['LOSE']
+    puts interplay['LOSE']
   end
 
   def restart?
@@ -66,5 +66,9 @@ class UserInteraction
 
   def exit(player)
     puts "Bye, #{player.name}. " + interplay['LEAVE'] + player.balance.to_s
+  end
+
+  def error(error)
+    puts interplay['ERROR'] + error.message
   end
 end

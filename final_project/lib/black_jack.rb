@@ -5,7 +5,7 @@ require_relative 'user_interaction'
 class BlackJack
   RATE = 10
   DEALER_STOP_VALUE = 17
-  INITIAL_MONEY = 20
+  INITIAL_MONEY = 1000
 
   attr_reader :player, :dealer, :deck, :actions, :interface, :round_finished
 
@@ -47,7 +47,7 @@ class BlackJack
     player.take_money(RATE)
     dealer.take_money(RATE)
   rescue ArgumentError => e
-    puts "ERROR: #{e.message}"
+    interface.error(e)
   end
 
   def deal_new_cards
@@ -97,18 +97,18 @@ class BlackJack
   end
 
   def user_tie
-    puts interface.tie
+    interface.tie
     player.add_money(RATE)
     dealer.add_money(RATE)
   end
 
   def user_win
-    puts interface.win
+    interface.win
     player.add_money(2 * RATE)
   end
 
   def user_lose
-    puts interface.lose
+    interface.lose
     dealer.add_money(RATE)
   end
 

@@ -15,5 +15,6 @@
     "TIE" : "********* Tie *********",
     "WIN" : "********* You win! *********",
     "PLAYER_BANKRUPT" : "bankrupt!",
-    "LEAVE" : "You leave with $ "
+    "LEAVE" : "You leave with $ ",
+    "ERROR" : "ERROR: "
 }
