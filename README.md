@@ -1,4 +1,4 @@
-# Ruby_course
+# Thinknetica_ruby_course
 
 [![View Code](https://img.shields.io/badge/View%20-Code-green)](https://github.com/berkovichpavel/ruby_course/tree/master)
 
